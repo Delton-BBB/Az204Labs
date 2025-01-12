@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ImageStoreAPI.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ImageStoreAPI.Controllers
@@ -7,11 +8,23 @@ namespace ImageStoreAPI.Controllers
     [Route("[controller]")]
     public class ImageStoreController : ControllerBase
     {
+        public IAzureBlobStorageService _azureService;
+
+        public ImageStoreController(IAzureBlobStorageService azureService) {
+        
+            _azureService = azureService;
+        }
+
+
+
         [Route("/imagestore")]
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult GetAllImages()
         {
-            return Ok("hello");
+           
+
+
+           return Ok(_azureService.getBlobs());
         }
 
         [HttpGet]

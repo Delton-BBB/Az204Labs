@@ -1,7 +1,7 @@
 [
   {
     "ContainingType": "ImageStoreAPI.Controllers.ImageStoreController",
-    "Method": "Index",
+    "Method": "GetAllImages",
     "RelativePath": "imagestore",
     "HttpMethod": "GET",
     "IsController": true,
