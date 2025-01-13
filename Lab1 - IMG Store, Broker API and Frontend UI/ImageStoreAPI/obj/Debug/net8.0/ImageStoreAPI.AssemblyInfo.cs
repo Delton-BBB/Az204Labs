@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ImageStoreAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f41a57a26eabb522cc4d150b7fe9d667758860ea")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0fb18279049fec365056fc3020ec5ffdf8ff94f")]
 [assembly: System.Reflection.AssemblyProductAttribute("ImageStoreAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ImageStoreAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

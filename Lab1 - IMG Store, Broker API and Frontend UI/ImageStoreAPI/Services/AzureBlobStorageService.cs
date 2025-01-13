@@ -2,7 +2,9 @@
 using Azure.Identity;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using System.IO;
 using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
 using static System.Net.WebRequestMethods;
 
 namespace ImageStoreAPI.Service
@@ -10,61 +12,84 @@ namespace ImageStoreAPI.Service
     public class AzureBlobStorageService : IAzureBlobStorageService
     {
         public BlobServiceClient _blobServiceClient;
-        public string _containerName = "imagestore";
-
-
 
         public AzureBlobStorageService(BlobServiceClient blobServiceClient) {
-        
             _blobServiceClient = blobServiceClient;
         }
 
 
-        public async Task<bool> createBlob(string blobName)
+        public async Task<bool> createBlob(string containerName, string blobName, FormFile stream)
         {
-            //BlobClient blob = _blobServiceClient.GetBlobContainerClient("").GetBlobClient(blobName);
+            bool isUploaded = false;
+            FormFile content;
 
-            //FormFile file = new FormFile(0,0,0,blobName,blobName);
-            //StreamContent content = new StreamContent();
+            try
+            {
+                await _blobServiceClient.GetBlobContainerClient(containerName).CreateIfNotExistsAsync();
 
-            //return await blob.UploadAsync();
 
-            return true;
+                content = new FormFile(stream.OpenReadStream(), 0, stream.Length, blobName, stream.FileName)
+                {
+                    Headers = new HeaderDictionary(),
+                    ContentType = "image/" + stream.FileName.Split('.').Last()
+                };
+
+
+                BlobClient blob = _blobServiceClient.GetBlobContainerClient(blobName).GetBlobClient(blobName);
+                BlobContentInfo response = await blob.UploadAsync(content.OpenReadStream());
+
+                if (response != null)
+                {
+                    isUploaded = true;
+
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+
+
+
+
+
+            return isUploaded;
         }
 
-        public Task<bool> deleteBlob(string blobName)
+        public async Task<bool> deleteBlob(string containerName, string blobName)
         {
-            throw new NotImplementedException();
+            bool isDeleted = await _blobServiceClient
+                .GetBlobContainerClient(containerName)
+                .GetBlobClient(blobName)
+                .DeleteIfExistsAsync();
+
+            return isDeleted;
         }
 
-        public async Task<BlobDownloadResult> getBlob(string blobName)
+        public async Task<BlobDownloadResult> getBlob(string containerName, string blobName)
         {
-            BlobClient x =  _blobServiceClient.GetBlobContainerClient(_containerName).GetBlobClient(blobName);
-            BlobDownloadResult b = await x.DownloadContentAsync();
-            return b;
-        }
+            BlobDownloadResult blobContent = await _blobServiceClient
+                .GetBlobContainerClient(containerName)
+                .GetBlobClient(blobName)
+                .DownloadContentAsync();
 
-
-        Task<Blob> IAzureBlobStorageService.getBlob(string blobName)
-        {
-            throw new NotImplementedException();
+            return blobContent;
         }
 
         public List<BlobItem> getBlobs()
         {
-
-            string connectionString = "BlobEndpoint=https://deltonstorageaccount.blob.core.windows.net/;QueueEndpoint=https://deltonstorageaccount.queue.core.windows.net/;FileEndpoint=https://deltonstorageaccount.file.core.windows.net/;TableEndpoint=https://deltonstorageaccount.table.core.windows.net/;SharedAccessSignature=sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2026-01-12T21:52:28Z&st=2025-01-12T13:52:28Z&spr=https&sig=XAP8sQPtTPrMIh7WaNQfgAIhP3UfYp2JsNxZ8ipxpjg%3D";
-            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
-
-            //BlobContainerClient containerClient = new BlobServiceClient(connectionString)
-            //    .GetBlobContainerClient(_containerName);
-
-
             List<BlobItem> blobs = [];
+            List<BlobContainerItem> containers = new List<BlobContainerItem>();
 
-            foreach (BlobItem blob in containerClient.GetBlobs())
+            foreach (BlobContainerItem containerItem in _blobServiceClient.GetBlobContainers())
             {
-                blobs.Add(blob);
+                containers.Add(containerItem);
+                
+                BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerItem.Name);
+                foreach (BlobItem blob in containerClient.GetBlobs())
+                {
+                    blobs.Add(blob);
+                }
             }
 
             return blobs;

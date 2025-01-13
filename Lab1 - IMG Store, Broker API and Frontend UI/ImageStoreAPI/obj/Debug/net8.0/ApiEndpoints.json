@@ -11,14 +11,19 @@
   },
   {
     "ContainingType": "ImageStoreAPI.Controllers.ImageStoreController",
-    "Method": "Create",
-    "RelativePath": "imagestore/create/{name}",
+    "Method": "GetImage",
+    "RelativePath": "imagestore/{containerName}/{blobName}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "name",
+        "Name": "containerName",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "blobName",
         "Type": "System.String",
         "IsRequired": true
       }
@@ -27,14 +32,45 @@
   },
   {
     "ContainingType": "ImageStoreAPI.Controllers.ImageStoreController",
-    "Method": "Delete",
-    "RelativePath": "imagestore/delete/{name}",
-    "HttpMethod": "GET",
+    "Method": "Create",
+    "RelativePath": "imagestore/create/{containerName}/{blobName}",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "name",
+        "Name": "containerName",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "blobName",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "fileContent",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ImageStoreAPI.Controllers.ImageStoreController",
+    "Method": "Delete",
+    "RelativePath": "imagestore/delete/{containerName}/{blobName}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "containerName",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "blobName",
         "Type": "System.String",
         "IsRequired": true
       }

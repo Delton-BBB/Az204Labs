@@ -1,4 +1,5 @@
-﻿using ImageStoreAPI.Service;
+﻿using ImageStoreAPI.Models;
+using ImageStoreAPI.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,30 +16,39 @@ namespace ImageStoreAPI.Controllers
             _azureService = azureService;
         }
 
-
+        [Route("/imagestore/{containerName}/{blobName}")]
+        [HttpGet]
+        public async Task<ActionResult> GetImage(string containerName, string blobName) 
+        {
+            return Ok(await _azureService.getBlob(containerName, blobName));
+        }
 
         [Route("/imagestore")]
         [HttpGet]
         public ActionResult GetAllImages()
         {
-           
-
-
            return Ok(_azureService.getBlobs());
         }
 
-        [HttpGet]
-        [Route("/imagestore/create/{name}")]
-        public ActionResult Create(string name)
+        [HttpPost]
+        [Route("/imagestore/create/{containerName}/{blobName}")]
+        public async Task<ActionResult> Create(string containerName, string blobName, [FromForm] InputFile content)
         {
-            return Ok(name + "Created");
+            FormFile file = new FormFile(content.fileContent.OpenReadStream(), 0, content.fileContent.Length, blobName, content.fileContent.FileName);
+           
+
+            bool isCreated = await _azureService
+                .createBlob(containerName, blobName, file);
+            return Ok(containerName + "/" + blobName + " Created");
         }
 
-        [HttpGet]
-        [Route("/imagestore/delete/{name}")]
-        public ActionResult Delete(string name)
+        [HttpPost]
+        [Route("/imagestore/delete/{containerName}/{blobName}")]
+        public async Task<ActionResult> Delete(string containerName, string blobName)
         {
-            return Ok(name + "Deleted");
+            bool isDeleted = await _azureService.
+                deleteBlob(containerName, blobName);
+            return Ok(containerName +"/" +blobName + " Deleted");
         }
 
     }

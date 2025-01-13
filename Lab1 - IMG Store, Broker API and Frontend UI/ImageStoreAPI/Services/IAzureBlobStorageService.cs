@@ -8,9 +8,9 @@ namespace ImageStoreAPI.Service
     {
         //public Task<BlobItem> Test();
         public List<BlobItem> getBlobs();
-        public Task<Blob> getBlob(string blobName);
-        public Task<Boolean> createBlob(string blobName);
-        public Task<Boolean> deleteBlob(string blobName);
+        public Task<BlobDownloadResult> getBlob(string containerName, string blobName);
+        public Task<bool> createBlob(string containerName, string blobName, FormFile content);
+        public Task<bool> deleteBlob(string containerName, string blobName);
 
     }
 }

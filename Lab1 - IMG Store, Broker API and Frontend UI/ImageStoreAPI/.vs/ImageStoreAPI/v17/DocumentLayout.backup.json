@@ -7,12 +7,7 @@
       "RelativeMoniker": "D:0:0:{7B1103C2-4DCA-4349-9FB1-CF43948F50F9}|ImageStoreAPI.csproj|solutionrelative:services\\azureblobstorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7B1103C2-4DCA-4349-9FB1-CF43948F50F9}|ImageStoreAPI.csproj|c:\\users\\delton.fernandes\\onedrive - british business bank plc\\documents\\github\\az204labs\\lab1 - img store, broker api and frontend ui\\imagestoreapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7B1103C2-4DCA-4349-9FB1-CF43948F50F9}|ImageStoreAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7B1103C2-4DCA-4349-9FB1-CF43948F50F9}|ImageStoreAPI.csproj|c:\\users\\delton.fernandes\\onedrive - british business bank plc\\documents\\github\\az204labs\\lab1 - img store, broker api and frontend ui\\imagestoreapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{7B1103C2-4DCA-4349-9FB1-CF43948F50F9}|ImageStoreAPI.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Delton.Fernandes\\AppData\\Local\\SourceServer\\860d90b90323fe498f5c06330aba52cfea786e685fdd6c0623142091994b51d2\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Services\\AzureBlobStorageService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7B1103C2-4DCA-4349-9FB1-CF43948F50F9}|ImageStoreAPI.csproj|c:\\users\\delton.fernandes\\onedrive - british business bank plc\\documents\\github\\az204labs\\lab1 - img store, broker api and frontend ui\\imagestoreapi\\controllers\\imagestorecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,6 +16,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{7B1103C2-4DCA-4349-9FB1-CF43948F50F9}|ImageStoreAPI.csproj|c:\\users\\delton.fernandes\\onedrive - british business bank plc\\documents\\github\\az204labs\\lab1 - img store, broker api and frontend ui\\imagestoreapi\\services\\iazureblobstorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7B1103C2-4DCA-4349-9FB1-CF43948F50F9}|ImageStoreAPI.csproj|solutionrelative:services\\iazureblobstorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7B1103C2-4DCA-4349-9FB1-CF43948F50F9}|ImageStoreAPI.csproj|c:\\users\\delton.fernandes\\onedrive - british business bank plc\\documents\\github\\az204labs\\lab1 - img store, broker api and frontend ui\\imagestoreapi\\models\\inputfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7B1103C2-4DCA-4349-9FB1-CF43948F50F9}|ImageStoreAPI.csproj|solutionrelative:models\\inputfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,19 +29,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 261,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Delton.Fernandes\\OneDrive - British Business Bank plc\\Documents\\GitHub\\Az204Labs\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\Delton.Fernandes\\OneDrive - British Business Bank plc\\Documents\\GitHub\\Az204Labs\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAADVAQAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-12T13:38:43.564Z",
+              "DocumentIndex": 1,
+              "Title": "AzureBlobStorageService.cs",
+              "DocumentMoniker": "C:\\Users\\Delton.Fernandes\\AppData\\Local\\SourceServer\\860d90b90323fe498f5c06330aba52cfea786e685fdd6c0623142091994b51d2\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Services\\AzureBlobStorageService.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\860d90b90323fe498f5c06330aba52cfea786e685fdd6c0623142091994b51d2\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Services\\AzureBlobStorageService.cs",
+              "ToolTip": "C:\\Users\\Delton.Fernandes\\AppData\\Local\\SourceServer\\860d90b90323fe498f5c06330aba52cfea786e685fdd6c0623142091994b51d2\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Services\\AzureBlobStorageService.cs [Read Only]",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\860d90b90323fe498f5c06330aba52cfea786e685fdd6c0623142091994b51d2\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Services\\AzureBlobStorageService.cs [Read Only]",
+              "ViewState": "AgIAABAAAAAAAAAAAADgvxgAAAAQAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-13T13:04:41.738Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "InputFile.cs",
+              "DocumentMoniker": "C:\\Users\\Delton.Fernandes\\OneDrive - British Business Bank plc\\Documents\\GitHub\\Az204Labs\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Models\\InputFile.cs",
+              "RelativeDocumentMoniker": "Models\\InputFile.cs",
+              "ToolTip": "C:\\Users\\Delton.Fernandes\\OneDrive - British Business Bank plc\\Documents\\GitHub\\Az204Labs\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Models\\InputFile.cs",
+              "RelativeToolTip": "Models\\InputFile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-13T11:47:37.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IAzureBlobStorageService.cs",
+              "DocumentMoniker": "C:\\Users\\Delton.Fernandes\\OneDrive - British Business Bank plc\\Documents\\GitHub\\Az204Labs\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Services\\IAzureBlobStorageService.cs",
+              "RelativeDocumentMoniker": "Services\\IAzureBlobStorageService.cs",
+              "ToolTip": "C:\\Users\\Delton.Fernandes\\OneDrive - British Business Bank plc\\Documents\\GitHub\\Az204Labs\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Services\\IAzureBlobStorageService.cs",
+              "RelativeToolTip": "Services\\IAzureBlobStorageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-13T11:41:26.351Z",
               "EditorCaption": ""
             },
             {
@@ -53,54 +78,22 @@
               "RelativeDocumentMoniker": "Services\\AzureBlobStorageService.cs",
               "ToolTip": "C:\\Users\\Delton.Fernandes\\OneDrive - British Business Bank plc\\Documents\\GitHub\\Az204Labs\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Services\\AzureBlobStorageService.cs",
               "RelativeToolTip": "Services\\AzureBlobStorageService.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAiwEEAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAcwCIAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-12T12:25:55.194Z",
+              "WhenOpened": "2025-01-13T11:37:44.178Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Delton.Fernandes\\OneDrive - British Business Bank plc\\Documents\\GitHub\\Az204Labs\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\Delton.Fernandes\\OneDrive - British Business Bank plc\\Documents\\GitHub\\Az204Labs\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-12T12:24:40.268Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "ImageStoreController.cs",
               "DocumentMoniker": "C:\\Users\\Delton.Fernandes\\OneDrive - British Business Bank plc\\Documents\\GitHub\\Az204Labs\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Controllers\\ImageStoreController.cs",
               "RelativeDocumentMoniker": "Controllers\\ImageStoreController.cs",
               "ToolTip": "C:\\Users\\Delton.Fernandes\\OneDrive - British Business Bank plc\\Documents\\GitHub\\Az204Labs\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Controllers\\ImageStoreController.cs",
               "RelativeToolTip": "Controllers\\ImageStoreController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAvwA0AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-12T12:24:07.361Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 139,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IAzureBlobStorageService.cs",
-              "DocumentMoniker": "C:\\Users\\Delton.Fernandes\\OneDrive - British Business Bank plc\\Documents\\GitHub\\Az204Labs\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Services\\IAzureBlobStorageService.cs",
-              "RelativeDocumentMoniker": "Services\\IAzureBlobStorageService.cs",
-              "ToolTip": "C:\\Users\\Delton.Fernandes\\OneDrive - British Business Bank plc\\Documents\\GitHub\\Az204Labs\\Lab1 - IMG Store, Broker API and Frontend UI\\ImageStoreAPI\\Services\\IAzureBlobStorageService.cs",
-              "RelativeToolTip": "Services\\IAzureBlobStorageService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-12T12:51:16.554Z",
               "EditorCaption": ""
             }
           ]
