@@ -4,6 +4,7 @@ using ImageStoreAPI.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Configuration;
+using System.Text.Json;
 
 namespace ImageStoreAPI.Controllers
 {
@@ -39,7 +40,7 @@ namespace ImageStoreAPI.Controllers
 
 
             //return Ok(Environment.GetEnvironmentVariable("CUSTOMCONNSTR_StorageSAS"));
-            return Ok(configuration.GetValue<string>("CUSTOMCONNSTR_:Storage:Blob:ConnectionString"));
+            return Ok( JsonSerializer.Serialize(configuration.GetValue<string>("CUSTOMCONNSTR_:Storage:Blob:ConnectionString")));
 
         }
 
