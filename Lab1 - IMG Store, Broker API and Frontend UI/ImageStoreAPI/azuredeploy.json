@@ -6,7 +6,7 @@
             "type": "object",
             "defaultValue": {
                 "signedServices": "b",
-                "signedPermission": "rw",
+                "signedPermission": "rwdlacu",
                 "signedExpiry": "2025-12-01T00:00:01Z",
                 "signedResourceTypes": "sco"
             }
@@ -15,6 +15,9 @@
             "type": "string"
         }
     },
+    // "variables": {
+    //     "StorageSAS" : ""
+    // },
     "resources": [
         {
             "name": "deltonkeyvault",
@@ -25,6 +28,7 @@
                 "displayName": "deltonkeyvault"
             },
             "properties": {
+                "enableSoftDelete": false,
                 "enabledForDeployment": true,
                 "enabledForTemplateDeployment": true,
                 "enabledForDiskEncryption": true,
@@ -53,7 +57,7 @@
             ],
             "name": "[concat('deltonkeyvault', '/', 'StorageSaSToken')]",
             "properties": {
-                "value": "[listAccountSas('deltonstorageaccount', '2023-05-01', parameters('accountSasProperties')).accountSasToken]"
+                "value": "[ concat('BlobEndpoint=https://deltonstorageaccount.blob.core.windows.net/;QueueEndpoint=https://deltonstorageaccount.queue.core.windows.net/;FileEndpoint=https://deltonstorageaccount.file.core.windows.net/;TableEndpoint=https://deltonstorageaccount.table.core.windows.net/;SharedAccessSignature=',listAccountSas('deltonstorageaccount', '2023-05-01', parameters('accountSasProperties')).accountSasToken)]"
             }
         },
         {
@@ -65,10 +69,10 @@
             },
             "location": "[resourceGroup().location]",
             "kind": "StorageV2",
-            "sku": {
-                "name": "Standard_ZRS",
-                "tier": "Standard"
-            }
+          "sku": {
+            "name": "Standard_ZRS",
+            "tier": "Standard"
+          }
         },
         {
             "name": "deltonappserviceplan",
@@ -100,7 +104,16 @@
             ],
             "properties": {
                 "name": "deltonwebapi",
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', 'deltonappserviceplan')]"
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', 'deltonappserviceplan')]",
+                "siteConfig": {
+                    "connectionStrings": [
+                        {
+                            "name": ":Storage:Blob:ConnectionString",
+                            "connectionstring": "[ concat('BlobEndpoint=https://deltonstorageaccount.blob.core.windows.net/;QueueEndpoint=https://deltonstorageaccount.queue.core.windows.net/;FileEndpoint=https://deltonstorageaccount.file.core.windows.net/;TableEndpoint=https://deltonstorageaccount.table.core.windows.net/;SharedAccessSignature=',listAccountSas('deltonstorageaccount', '2023-05-01', parameters('accountSasProperties')).accountSasToken)]",
+                            "type": "Custom"
+                        }
+                    ]
+                }
             }
         },
         {
@@ -121,5 +134,10 @@
             }
         }
     ],
-    "outputs": {}
+    "outputs": {
+        "StorageSAS": {
+            "type": "string",
+                "value": "[ concat('BlobEndpoint=https://deltonstorageaccount.blob.core.windows.net/;QueueEndpoint=https://deltonstorageaccount.queue.core.windows.net/;FileEndpoint=https://deltonstorageaccount.file.core.windows.net/;TableEndpoint=https://deltonstorageaccount.table.core.windows.net/;SharedAccessSignature=',listAccountSas('deltonstorageaccount', '2023-05-01', parameters('accountSasProperties')).accountSasToken)]"
+        }
+    }
 }

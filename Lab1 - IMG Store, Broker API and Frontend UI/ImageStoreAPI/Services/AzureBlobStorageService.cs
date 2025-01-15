@@ -1,20 +1,16 @@
-﻿using Azure;
-using Azure.Identity;
-using Azure.Storage.Blobs;
+﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-using System.IO;
-using System.Reflection.Metadata;
-using System.Reflection.PortableExecutable;
-using static System.Net.WebRequestMethods;
 
 namespace ImageStoreAPI.Service
 {
     public class AzureBlobStorageService : IAzureBlobStorageService
     {
         public BlobServiceClient _blobServiceClient;
+        public ILogger<AzureBlobStorageService> _logger;
 
-        public AzureBlobStorageService(BlobServiceClient blobServiceClient) {
+        public AzureBlobStorageService(BlobServiceClient blobServiceClient, ILogger<AzureBlobStorageService> loggerFactory) {
             _blobServiceClient = blobServiceClient;
+            _logger = loggerFactory;
         }
 
 
@@ -33,9 +29,6 @@ namespace ImageStoreAPI.Service
                     Console.WriteLine(containerName + " Created");
                 }
 
-
-
-
                 BlobClient blob = _blobServiceClient.GetBlobContainerClient(containerName).GetBlobClient(blobName+"."+fileExtension);
                 BlobContentInfo response = await blob.UploadAsync(file.OpenReadStream(),new BlobHttpHeaders() { 
                     ContentType = "image/" + fileExtension
@@ -47,65 +40,95 @@ namespace ImageStoreAPI.Service
                 }
             }
             catch (Exception e) {
-                return e.Message;
+                _logger.LogError(e, "Error in Create Blob Method");
+                throw new Exception(e.Message);
             }
             return isUploaded;
         }
 
         public async Task<string> deleteBlob(string containerName, string blobName)
         {
-            bool isDeleted = await _blobServiceClient
-                .GetBlobContainerClient(containerName)
-                .GetBlobClient(blobName)
-                .DeleteIfExistsAsync();
+            try
+            {
+                bool isDeleted = await _blobServiceClient
+                    .GetBlobContainerClient(containerName)
+                    .GetBlobClient(blobName)
+                    .DeleteIfExistsAsync();
+                return isDeleted.ToString();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error in Delete Blob Method");
+                throw new Exception(e.Message);
+            }
 
-            return isDeleted.ToString();
         }
 
-        public async Task<BlobDownloadResult> getBlob(string containerName, string blobName)
+        public async Task<BlobDownloadResult?> getBlob(string containerName, string blobName)
         {
-            BlobDownloadResult blobContent = await _blobServiceClient
+            try
+            {
+                BlobDownloadResult blobContent = await _blobServiceClient
                 .GetBlobContainerClient(containerName)
                 .GetBlobClient(blobName)
                 .DownloadContentAsync();
-
-            return blobContent;
-        }
-
-        public List<BlobItem> getBlobsDetailed()
-        {
-            List<BlobItem> blobs = [];
-            List<BlobContainerItem> containers = new List<BlobContainerItem>();
-
-            foreach (BlobContainerItem containerItem in _blobServiceClient.GetBlobContainers())
-            {
-                containers.Add(containerItem);
-                
-                BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerItem.Name);
-                foreach (BlobItem blob in containerClient.GetBlobs())
-                {
-                    blobs.Add(blob);
-                }
+                return blobContent;
+            }
+            catch (Exception e){
+                _logger.LogError(e, "error in getblob method");
+                throw new Exception(e.Message);
             }
 
-            return blobs;
         }
 
-        public List<string> getBlobs()
+        public List<BlobItem>? getBlobsDetailed()
         {
-            List<string> blobPaths = new List<string>();
-
-            foreach (BlobContainerItem containerItem in _blobServiceClient.GetBlobContainers())
+            try
             {
-                foreach (BlobItem blobItem in _blobServiceClient.GetBlobContainerClient(containerItem.Name).GetBlobs())
-                {
-                    blobPaths.Add(containerItem.Name+"/"+blobItem.Name);
-                }
-            }
+                List<BlobItem> blobs = [];
+                List<BlobContainerItem> containers = new List<BlobContainerItem>();
 
-            return blobPaths;
+                foreach (BlobContainerItem containerItem in _blobServiceClient.GetBlobContainers())
+                {
+                    containers.Add(containerItem);
+
+                    BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerItem.Name);
+                    foreach (BlobItem blob in containerClient.GetBlobs())
+                    {
+                        blobs.Add(blob);
+                    }
+                }
+                return blobs;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "error in Get Blobs Detailed Method");
+                throw new Exception(e.Message);
+            }
         }
 
+        public List<string>? getBlobs()
+        {
+            try
+            {
 
+                List<string> blobPaths = new List<string>();
+
+                foreach (BlobContainerItem containerItem in _blobServiceClient.GetBlobContainers())
+                {
+                    foreach (BlobItem blobItem in _blobServiceClient.GetBlobContainerClient(containerItem.Name).GetBlobs())
+                    {
+                        blobPaths.Add(containerItem.Name + "/" + blobItem.Name);
+                    }
+                }
+
+                return blobPaths;
+
+            }catch(Exception e)
+            {
+                _logger.LogError(e, "error in Get Blob Method");
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
