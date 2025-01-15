@@ -18,52 +18,48 @@ namespace ImageStoreAPI.Service
         }
 
 
-        public async Task<bool> createBlob(string containerName, string blobName, FormFile stream)
+        public async Task<string> createBlob(string containerName, string blobName, FormFile file)
         {
-            bool isUploaded = false;
-            FormFile content;
-
+            string isUploaded = "false";
+            string fileExtension = file.FileName.Split('.').Last();
             try
             {
-                await _blobServiceClient.GetBlobContainerClient(containerName).CreateIfNotExistsAsync();
-
-
-                content = new FormFile(stream.OpenReadStream(), 0, stream.Length, blobName, stream.FileName)
+                if ((await _blobServiceClient.GetBlobContainerClient(containerName).CreateIfNotExistsAsync()) == null)
                 {
-                    Headers = new HeaderDictionary(),
-                    ContentType = "image/" + stream.FileName.Split('.').Last()
-                };
+                    Console.WriteLine(containerName + " Exists");
+                }
+                else
+                {
+                    Console.WriteLine(containerName + " Created");
+                }
 
 
-                BlobClient blob = _blobServiceClient.GetBlobContainerClient(blobName).GetBlobClient(blobName);
-                BlobContentInfo response = await blob.UploadAsync(content.OpenReadStream());
+
+
+                BlobClient blob = _blobServiceClient.GetBlobContainerClient(containerName).GetBlobClient(blobName+"."+fileExtension);
+                BlobContentInfo response = await blob.UploadAsync(file.OpenReadStream(),new BlobHttpHeaders() { 
+                    ContentType = "image/" + fileExtension
+                });
 
                 if (response != null)
                 {
-                    isUploaded = true;
-
+                    isUploaded = "true";
                 }
             }
-            catch (Exception e)
-            {
-
+            catch (Exception e) {
+                return e.Message;
             }
-
-
-
-
-
             return isUploaded;
         }
 
-        public async Task<bool> deleteBlob(string containerName, string blobName)
+        public async Task<string> deleteBlob(string containerName, string blobName)
         {
             bool isDeleted = await _blobServiceClient
                 .GetBlobContainerClient(containerName)
                 .GetBlobClient(blobName)
                 .DeleteIfExistsAsync();
 
-            return isDeleted;
+            return isDeleted.ToString();
         }
 
         public async Task<BlobDownloadResult> getBlob(string containerName, string blobName)
@@ -76,7 +72,7 @@ namespace ImageStoreAPI.Service
             return blobContent;
         }
 
-        public List<BlobItem> getBlobs()
+        public List<BlobItem> getBlobsDetailed()
         {
             List<BlobItem> blobs = [];
             List<BlobContainerItem> containers = new List<BlobContainerItem>();
@@ -94,5 +90,22 @@ namespace ImageStoreAPI.Service
 
             return blobs;
         }
+
+        public List<string> getBlobs()
+        {
+            List<string> blobPaths = new List<string>();
+
+            foreach (BlobContainerItem containerItem in _blobServiceClient.GetBlobContainers())
+            {
+                foreach (BlobItem blobItem in _blobServiceClient.GetBlobContainerClient(containerItem.Name).GetBlobs())
+                {
+                    blobPaths.Add(containerItem.Name+"/"+blobItem.Name);
+                }
+            }
+
+            return blobPaths;
+        }
+
+
     }
 }

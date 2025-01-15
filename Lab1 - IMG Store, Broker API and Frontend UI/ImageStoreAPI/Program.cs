@@ -15,11 +15,6 @@ builder.Services.AddAzureClients(azure =>
     azure.AddBlobServiceClient(builder.Configuration.GetValue<string>("Azure:Storage:Blob:ConnectionString"));
 });
 
-//builder.Services.AddSingleton(x =>
-//{
-//    return new BlobServiceClient(connectionString);
-//});
-
 var app = builder.Build();
 
 app.UseHttpsRedirection();

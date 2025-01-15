@@ -1,4 +1,5 @@
-﻿using ImageStoreAPI.Models;
+﻿using Azure.Storage.Blobs.Models;
+using ImageStoreAPI.Models;
 using ImageStoreAPI.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,25 +31,33 @@ namespace ImageStoreAPI.Controllers
            return Ok(_azureService.getBlobs());
         }
 
+        [Route("/imagestoredetailed")]
+        [HttpGet]
+        public ActionResult GetAllImagesDetailed()
+        {
+            return Ok(_azureService.getBlobsDetailed());
+        }
+
         [HttpPost]
         [Route("/imagestore/create/{containerName}/{blobName}")]
         public async Task<ActionResult> Create(string containerName, string blobName, [FromForm] InputFile content)
         {
             FormFile file = new FormFile(content.fileContent.OpenReadStream(), 0, content.fileContent.Length, blobName, content.fileContent.FileName);
            
+            // add a metadata list ([desc: ""],....) which can be stored at metadata for the blob 
 
-            bool isCreated = await _azureService
+            string isCreated = await _azureService
                 .createBlob(containerName, blobName, file);
-            return Ok(containerName + "/" + blobName + " Created");
+            return Ok(containerName + "/" + blobName + " Created = "+isCreated);
         }
 
         [HttpPost]
         [Route("/imagestore/delete/{containerName}/{blobName}")]
         public async Task<ActionResult> Delete(string containerName, string blobName)
         {
-            bool isDeleted = await _azureService.
+            string isDeleted = await _azureService.
                 deleteBlob(containerName, blobName);
-            return Ok(containerName +"/" +blobName + " Deleted");
+            return Ok(containerName +"/" +blobName + " Deleted = " + isDeleted);
         }
 
     }
