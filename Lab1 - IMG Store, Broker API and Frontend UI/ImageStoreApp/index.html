@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Endpoints</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+    }
+
+    #output {
+        text-wrap: wrap;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>API Endpoints</h1>
+  <button onclick="fetchEndpoint('imagestore')">Fetch Endpoint 1</button>
+  <button onclick="fetchEndpoint('imagestoredetailed')">Fetch Endpoint 2</button>
+  <button onclick="fetchEndpoint('strings')">Fetch Endpoint 3</button>
+  <!-- <button onclick="fetchEndpoint('')">Fetch Endpoint 4</button> -->
+  <!-- <button onclick="fetchEndpoint('endpoint5')">Fetch Endpoint 5</button> -->
+  <div id="result">
+    <h2>Result</h2>
+    <pre id="output">Click a button to fetch data</pre>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
