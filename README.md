@@ -1,6 +1,6 @@
 # Az204Labs
 
-Lab 1 Usage
+## Lab 1 Usage
 
 ### Create Azure Env
 *Using the 2 PS scripts and arm template*
