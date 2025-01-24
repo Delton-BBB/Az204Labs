@@ -1,0 +1,23 @@
+Create:
+- Storage account StandarLRS
+- Function App Linux Consumption 
+
+
+Configure Local Function App deployment 
+- func init --worker-runtime dotnet-isolated --target-framework net8.0 --force
+- local.settings.json -  "AzureWebJobsStorage": "UseDevelopmentStorage=true" to  "AzureWebJobsStorage": "ConnectionString=****"
+- Run dotnet build
+- Implement ILoggerFactory loggerFactory using DI 
+
+
+- Create 3 Functions
+	- Echo (Http Triggered - Get,Post) - Echo the contents of body back to client 
+	- Recurring (Time Triggerd - every min) - print current time to logs
+	- GetSettingInfo (Http Triggered - Get, Post) - Returns the settings.json file contents stored in storage container using connection string saved in local.settings.json
+
+Deploy local App to function app on azure
+- func azure functionapp publish <function-app-name> --dotnet-version 8.0
+
+Extension - 
+- Create an arm template to automate the az env creation 
+- Ammend deployment code, so you store all labs in 1 storage account and deploy using params

@@ -11,13 +11,15 @@
                 "signedResourceTypes": "sco"
             }
         },
-        "objectId": {
-            "type": "string"
+        "objectid": {
+            "type": "string",
+            "metadata": {
+                "description": "Key vault access permission for the desired objectid"
+            }
         }
     },
-    // "variables": {
-    //     "StorageSAS" : ""
-    // },
+    "variables": {
+    },
     "resources": [
         {
             "name": "deltonkeyvault",
