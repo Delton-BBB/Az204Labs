@@ -1,3 +1,5 @@
+Original Task - Create a Rest API using C#.net SDK, did that in lab 1, so did it with another language instead: python.
+
 Create Rest API using python - 
     Get 
     GetAll
