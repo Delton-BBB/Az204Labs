@@ -12,13 +12,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 
-
+// Custom Services
 builder.Services.AddSingleton<IAzureBlobStorageService, AzureBlobStorageService>();
+
+// Azure Client
 builder.Services.AddAzureClients(azure =>
 {
     azure.AddBlobServiceClient(builder.Configuration.GetValue<string>("CUSTOMCONNSTR_:Storage:Blob:ConnectionString"));
 });
+
+// Logging
 builder.Services.AddLogging(builder => builder.AddConsole());
+
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

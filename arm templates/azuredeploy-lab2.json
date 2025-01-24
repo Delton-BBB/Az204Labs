@@ -1,0 +1,129 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "objectid": {
+            "type": "string",
+            "metadata": {
+                "description": "Key vault access permission for the desired objectid"
+            }
+        },
+        "accountSasProperties": {
+            "type": "object",
+            "defaultValue": {
+                "signedServices": "b",
+                "signedPermission": "rwdlacu",
+                "signedExpiry": "2025-02-01T00:00:01Z",
+                "signedResourceTypes": "sco"
+            }
+        }
+    },
+    "functions": [],
+    "variables": {
+        "functionAppName": "deltonfuncapp",
+        "storageAccountName": "deltonfuncstore",
+        "appServicePlanName": "deltonasp",
+        "keyVaultAppName": "deltonkeyvault",
+        "sasTokenName": "SASConnectionString"
+    },
+    "resources": [
+        {
+            "name": "[variables('storageAccountName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2023-05-01",
+            "tags": {
+                "displayName": "[variables('storageAccountName')]"
+            },
+            "location": "[resourceGroup().location]",
+            "kind": "StorageV2",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            }
+        },
+        {
+            "name": "[variables('appServicePlanName')]",
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2024-04-01",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "Y1",
+                "tier": "Dynamic"
+            },
+            "tags": {
+                "displayName": "[variables('appServicePlanName')]"
+            },
+            "properties": {
+                "name": "[variables('appServicePlanName')]"
+            }
+        },
+        {
+            "name": "[variables('functionAppName')]",
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2024-04-01",
+            "location": "[resourceGroup().location]",
+            "kind": "functionapp",
+            "tags": {
+                "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/',variables('appServicePlanName'))]": "Resource",
+                "displayName": "[variables('functionAppName')]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+
+            ],
+            "properties": {
+                "name": "[variables('functionAppName')]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
+            }
+        },
+        {
+            "name": "[variables('keyVaultAppName')]",
+            "type": "Microsoft.KeyVault/vaults",
+            "apiVersion": "2023-07-01",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "displayName": "[variables('keyVaultAppName')]"
+            },
+            "properties": {
+                "enabledForDeployment": true,
+                "enabledForTemplateDeployment": true,
+                "enabledForDiskEncryption": true,
+                "tenantId": "[subscription().tenantId]",
+                "enablePurgeProtection": false,
+                "accessPolicies": [
+                    {
+                        "tenantId": "[subscription().tenantId]",
+                        "objectId": "[parameters('objectid')]",
+                        "permissions": {
+                            "keys": [
+                                "Get"
+                            ],
+                            "secrets": [
+                                "List",
+                                "Get",
+                                "Set"
+                            ]
+                        }
+                    }
+                ],
+                "sku": {
+                    "name": "standard",
+                    "family": "A"
+                }
+            }
+        },
+        {
+            "apiVersion": "2023-07-01",
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "dependsOn": [
+                "[concat('Microsoft.KeyVault/vaults/', variables('keyVaultAppName'))]"
+            ],
+            "name": "[concat(variables('keyVaultAppName'), '/', variables('sasTokenName'))]",
+            "properties": {
+                "value": "[ concat('BlobEndpoint=https://', variables('storageAccountName'),'.blob.core.windows.net/;QueueEndpoint=https://', variables('storageAccountName'),'.queue.core.windows.net/;FileEndpoint=https://', variables('storageAccountName'),'.file.core.windows.net/;TableEndpoint=https://', variables('storageAccountName'),',.table.core.windows.net/;SharedAccessSignature=',listAccountSas(variables('storageAccountName'), '2023-05-01', parameters('accountSasProperties')).accountSasToken)]"
+            }
+        }
+    ],
+    "outputs": {}
+}
