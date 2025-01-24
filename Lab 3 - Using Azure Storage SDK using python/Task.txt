@@ -1,0 +1,8 @@
+Create Rest API using python - 
+    Get 
+    GetAll
+    Create 
+    Delete 
+
+Test rest Api using postman requests
+
