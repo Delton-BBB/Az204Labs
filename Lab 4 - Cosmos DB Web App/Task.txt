@@ -1,0 +1,4 @@
+Tools used: 
+
+- Create azure cosmos db for nosql 
+- Create Cosmos db client in c# and use it to perform CRUD operations
