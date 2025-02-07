@@ -1,0 +1,34 @@
+1. Creat an image and deploy it to azure container resgistry 
+- Open starter Project folder containing .net application
+- Create a docker file 
+- Delete Sln file
+- Run Dotnet Run 
+- Paste commands into dockerfile
+- Compress lab 5 folder in zip 
+- upload to cloud shell 
+- create a new dir, extracts zip files in it, set read permission and cd into it
+- Create a container registry using basic sku
+
+
+2. Deploy the image into az container instance
+
+3. Deploy the image into az container apps 
+
+
+
+
+Step 1 - Create a DockerFile 
+	- Create a build container Which includes creating build/publish folder containing dll's
+	- Create a runtime container and copy the dll's into it and define the startpoint file, projname.dll
+
+Step 2 - Zip File containg - csproj file, dockerfile, program.cs file
+
+Step 3 - Create a Azure container registry 
+
+Step 4 - Create an image and deploy it to container registry using ACR tasks (az acr build --registry <acr-name> --image <image-name>:<tag> <source-location>)
+
+Step 5 - Enable Admin user on ACR to use the image. Can be done by enabling the "admin user" tickbox in access keys of the ACR.
+
+Step 6 - Create a container instance using the image in ACR.
+
+

@@ -1,0 +1,17 @@
+Here is my task - help me perform/create the following:
+
+I have a ipcheckapp.cs file containing a code snippet which the current ip on the connect network interface and prints it using console.writeline in c#
+
+i have two files - 
+program.cs and ipcheckapp.csproj
+
+Step 1
+Now considering this information i want to create a dockerfile and deploy it to the azure container registry.
+
+Step 2
+After using the registry image, deploy it in azure container instance 
+
+Step 3
+And finally deploy in azure container apps
+
+Now this is very important and mission critical so please make sure to provide me with the best and thought out solution 
