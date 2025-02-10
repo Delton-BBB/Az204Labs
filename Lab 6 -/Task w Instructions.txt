@@ -1,0 +1,12 @@
+- Register an application on MS Entra ID Single tenant.
+- (On Azure -> registered app -> authentication -> Add a web setting with 
+	- redirect url - https://localhost:5001/ 
+	- ront-channel logout url - https://localhost:5001/signout-oidc
+	)
+- Create a AD user
+- Run the following command "dotnet new mvc --auth SingleOrg --client-id <application_ID> --tenant-id <tenant_ID> --domain <domain_Name> to create a web app, with MIcrosoft identity enabled template
+- Set the launchsetting.json to https://localhost:5001 same as the redirect url
+
+-  dotnet build
+-  dotnet dev-certs https --trust
+-  dotnet run

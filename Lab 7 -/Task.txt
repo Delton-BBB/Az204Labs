@@ -1,0 +1,16 @@
+Create  - Function App
+	- Key Vault 
+	- Storage Account 
+
+Create a system-assigned identity for function app 
+
+Add RBAC roles to function app MI, to read secrets from key vault 
+
+Add this as the following as an env variable for function app 
+	Key - StorageConnectionString 
+	Value - @Microsoft.KeyVault(SecretUri=<Secret Identifier>)
+
+Create a function in function app which uses the connection string to get a blob in storage account records.json,
+which prints the contents of the file to the response
+
+

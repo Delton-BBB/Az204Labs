@@ -1,1 +1,10 @@
-https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview?pivots=javascript&tabs=in-process%2Cnodejs-v3%2Cv1-model#learn-more
+- Understand Durable Functions
+
+- Create Durable Functions with
+	- 1 Orchestration function 
+	- 2 Activity functions 
+	- 1 Client Function
+
+The Function Architecture being deployed is listed in the website below - as pattern 5 Human interaction pattern. Where a manual step is required, else step escalated
+
+https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview?pivots=javascript&tabs=in-process%2Cnodejs-v3%2Cv1-model
